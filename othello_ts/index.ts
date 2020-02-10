@@ -1,4 +1,4 @@
-﻿//<reference path="Board.ts"/>
+﻿
 
 import Board from "./Board"
 let board = new Board();

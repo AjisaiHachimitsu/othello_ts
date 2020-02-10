@@ -1,12 +1,14 @@
-﻿class Board
+﻿export default class Board
 {
     readonly height:number;
     readonly width: number;
+    readonly ninzu: number;
     board: number[][];
     constructor()
     {
         this.height = 8;
         this.width = 8;
+        this.ninzu = 2;
         this.board = new Array(this.height);
         for (let i = 0; i < this.board.length;i++)
         {
@@ -16,6 +18,10 @@
                 this.board[i][j] = 0;
             }
         }
+        this.board[3][4] = 1;
+        this.board[4][3] = 1;
+        this.board[3][3] = 2;
+        this.board[4][4] = 2;
     }
     Draw(table:HTMLTableElement)
     {
@@ -43,6 +49,3 @@
         }
     }
 }
-let board2 = new Board();
-let Table:HTMLTableElement = document.getElementById("table")as HTMLTableElement ;
-board2.Draw(Table);

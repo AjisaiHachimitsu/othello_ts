@@ -16,14 +16,12 @@ export default class Board {
         this.board[4][4] = 2;
     }
     Draw(table, colors) {
-        table.style.backgroundColor = "green";
-        table.style.borderColor = "black";
-        table.style.borderCollapse = "collapse";
         for (let i = 0; i <= this.height; i++) {
             table.insertRow(-1);
             for (let j = 0; j <= this.width; j++) {
                 table.rows[i].insertCell(-1);
                 let cell = table.rows[i].cells[j];
+                cell.style.borderWidth = "medium";
                 if (i == 0) {
                     if (j != 0)
                         cell.innerHTML = String(j);

@@ -25,9 +25,6 @@
     }
     Draw(table: HTMLTableElement, colors: string[])
     {
-        table.style.backgroundColor = "green";
-        table.style.borderColor = "black";
-        table.style.borderCollapse="collapse"
         for (let i = 0; i <= this.height; i++)
         {
             table.insertRow(-1);
@@ -35,6 +32,7 @@
             {
                 table.rows[i].insertCell(-1);
                 let cell = table.rows[i].cells[j];
+                cell.style.borderWidth = "medium";
                 if (i == 0)
                 {
                     if (j != 0)

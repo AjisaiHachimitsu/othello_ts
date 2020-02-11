@@ -1,0 +1,7 @@
+﻿.board{
+    background-color:green;
+    border-color:black;
+    border-collapse:collapse;
+    table-layout:fixed;
+    border-width:thick;
+}

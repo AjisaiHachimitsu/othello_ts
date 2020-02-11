@@ -91,5 +91,5 @@ function CellClick(cell: HTMLTableCellElement): void
     position = new Array(2);
     position[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
     position[1] = cell.cellIndex;
-    alert(position);
+    
 }

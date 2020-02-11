@@ -65,6 +65,5 @@ function CellClick(cell) {
     position = new Array(2);
     position[0] = cell.parentNode.rowIndex;
     position[1] = cell.cellIndex;
-    alert(position);
 }
 //# sourceMappingURL=Board.js.map

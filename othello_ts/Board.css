@@ -1,7 +1,19 @@
 ﻿.board{
-    background-color:green;
+    /*background-color:green;*/
     border-color:black;
     border-collapse:collapse;
     table-layout:fixed;
     border-width:thick;
+    font-size:x-large;
+}
+
+.board .head {
+
+    border-width: medium;
+    background-color:lightgreen;
+    font-weight:bold;
+}
+.board .body {
+    background-color: green;
+    border-width: medium;
 }

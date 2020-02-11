@@ -15,7 +15,10 @@ export default class Board {
         this.board[3][3] = 2;
         this.board[4][4] = 2;
     }
-    Draw(table) {
+    Draw(table, colors) {
+        table.style.backgroundColor = "green";
+        table.style.borderColor = "black";
+        table.style.borderCollapse = "collapse";
         for (let i = 0; i <= this.height; i++) {
             table.insertRow(-1);
             for (let j = 0; j <= this.width; j++) {
@@ -29,7 +32,13 @@ export default class Board {
                     cell.innerHTML = String(i);
                 }
                 else {
-                    cell.innerHTML = String(this.board[i - 1][j - 1]);
+                    if (this.board[i - 1][j - 1]) {
+                        cell.style.color = colors[this.board[i - 1][j - 1] - 1];
+                        cell.innerHTML = "●";
+                    }
+                    else {
+                        cell.innerHTML = "　";
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 ﻿export default class Board
 {
-    readonly height:number;
+    readonly height: number;
     readonly width: number;
     readonly ninzu: number;
     board: number[][];
@@ -10,10 +10,10 @@
         this.width = 8;
         this.ninzu = 2;
         this.board = new Array(this.height);
-        for (let i = 0; i < this.board.length;i++)
+        for (let i = 0; i < this.board.length; i++)
         {
             this.board[i] = new Array(this.width);
-            for (let j = 0; j < this.board[i].length;j++)
+            for (let j = 0; j < this.board[i].length; j++)
             {
                 this.board[i][j] = 0;
             }
@@ -23,8 +23,11 @@
         this.board[3][3] = 2;
         this.board[4][4] = 2;
     }
-    Draw(table:HTMLTableElement)
+    Draw(table: HTMLTableElement, colors: string[])
     {
+        table.style.backgroundColor = "green";
+        table.style.borderColor = "black";
+        table.style.borderCollapse="collapse"
         for (let i = 0; i <= this.height; i++)
         {
             table.insertRow(-1);
@@ -43,7 +46,16 @@
                 }
                 else
                 {
-                    cell.innerHTML = String(this.board[i-1][j-1]);
+                    if (this.board[i - 1][j - 1])
+                    {
+                        cell.style.color = colors[this.board[i - 1][j - 1] - 1];
+                        cell.innerHTML = "●";
+                    }
+                    else
+                    {
+                        cell.innerHTML = "　";
+                    }
+
                 }
             }
         }

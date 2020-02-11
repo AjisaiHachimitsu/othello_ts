@@ -1,5 +1,6 @@
-import Board from "./Board";
+import Board from "./Board.js";
 let board = new Board();
 let Table = document.getElementById("table");
-board.Draw(Table);
+const colors = ["black", "white"];
+board.Draw(Table, colors);
 //# sourceMappingURL=index.js.map

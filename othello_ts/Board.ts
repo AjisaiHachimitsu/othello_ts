@@ -3,7 +3,7 @@
     readonly size: number;
     //readonly ninzu: number;
     readonly dimension: number;
-    board: number[][];
+    private board: number[][];
     //junban = 0;
     constructor()
     {
@@ -87,7 +87,6 @@
     {
         return this.board[pos[0]][pos[1]];
     }
-    
 }
 
 

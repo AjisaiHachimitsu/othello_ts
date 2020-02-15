@@ -1,31 +1,38 @@
-export function Output(board, table, colors) {
-    table.className = "board";
-    table.onclick = function (event) {
-        CellClick(event.target);
-    };
-    for (let i = 0; i <= this.height; i++) {
-        table.insertRow(-1);
-        for (let j = 0; j <= this.width; j++) {
-            table.rows[i].insertCell(-1);
-            let cell = table.rows[i].cells[j];
-            //cell.style.borderWidth = "medium";
-            if (i == 0) {
-                cell.className = "head";
-                if (j != 0)
-                    cell.innerHTML = String(j);
-            }
-            else if (j == 0) {
-                cell.className = "head";
-                cell.innerHTML = String(i);
-            }
-            else {
-                cell.className = "body";
-                if (board.GetBoard([i - 1, j - 1]) != -1) {
-                    cell.style.color = colors[board.GetBoard([i - 1, j - 1])];
-                    cell.innerHTML = "●";
+export default class OthelloIo {
+    constructor(board0, table0, colors0) {
+        this.board = board0;
+        this.table = table0;
+        this.colors = colors0;
+    }
+    Output() {
+        this.table.className = "board";
+        this.table.onclick = function (event) {
+            CellClick(event.target);
+        };
+        for (let i = 0; i <= this.board.size; i++) {
+            this.table.insertRow(-1);
+            for (let j = 0; j <= this.board.size; j++) {
+                this.table.rows[i].insertCell(-1);
+                let cell = this.table.rows[i].cells[j];
+                //cell.style.borderWidth = "medium";
+                if (i == 0) {
+                    cell.className = "head";
+                    if (j != 0)
+                        cell.innerHTML = String(j);
+                }
+                else if (j == 0) {
+                    cell.className = "head";
+                    cell.innerHTML = String(i);
                 }
                 else {
-                    cell.innerHTML = "　";
+                    cell.className = "body";
+                    if (this.board.GetBoard([i - 1, j - 1]) != -1) {
+                        cell.style.color = this.colors[this.board.GetBoard([i - 1, j - 1])];
+                        cell.innerHTML = "●";
+                    }
+                    else {
+                        cell.innerHTML = "　";
+                    }
                 }
             }
         }

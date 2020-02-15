@@ -90,6 +90,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Board.ts" />
     <TypeScriptCompile Include="index.ts" />
+    <TypeScriptCompile Include="othello_io.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

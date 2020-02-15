@@ -1,19 +1,19 @@
 ﻿export default class Board
 {
-    readonly height: number;
-    readonly width: number;
-    readonly ninzu: number;
+    readonly size: number;
+    //readonly ninzu: number;
+    readonly dimension: number;
     board: number[][];
-    junban = 0;
+    //junban = 0;
     constructor()
     {
-        this.height = 8;
-        this.width = 8;
-        this.ninzu = 2;
-        this.board = new Array(this.height);
+        this.size = 8;
+        //this.ninzu = 2;
+        this.dimension = 2;
+        this.board = new Array(this.size);
         for (let i = 0; i < this.board.length; i++)
         {
-            this.board[i] = new Array(this.width);
+            this.board[i] = new Array(this.size);
             for (let j = 0; j < this.board[i].length; j++)
             {
                 this.board[i][j] = -1;
@@ -31,7 +31,7 @@
         return true;
     }
 
-    Draw(table: HTMLTableElement, colors: string[]): void
+    /*Draw(table: HTMLTableElement, colors: string[]): void
     {
         table.className = "board";
         table.onclick = function (event)
@@ -73,7 +73,7 @@
             }
         }
 
-    }
+    }*/
 
     Input(clickPos: number[]):number[]
     {
@@ -82,14 +82,12 @@
         position[1] = clickPos[1] - 1;
         return position;
     }
-}
 
-
-function CellClick(cell: HTMLTableCellElement): void
-{
-    let position: number[];
-    position = new Array(2);
-    position[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
-    position[1] = cell.cellIndex;
+    GetBoard(pos: number[]):number
+    {
+        return this.board[pos[0]][pos[1]];
+    }
     
 }
+
+

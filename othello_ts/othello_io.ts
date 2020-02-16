@@ -1,80 +1,71 @@
 ﻿import Board from "./Board.js"
-export default class OthelloIo
+
+
+function start(table: HTMLTableElement,  size: number)
 {
-    readonly table: HTMLTableElement;
-    readonly board: Board;
-    readonly colors: string[];
-    constructor(board0: Board, table0: HTMLTableElement, colors0: string[])
+    table.className = "board";
+    for (let i = 0; i <= size; i++)
     {
-        this.board = board0;
-        this.table = table0;
-        this.colors = colors0;
-
-        this.table.className = "board";
-        for (let i = 0; i <= this.board.size; i++)
+        table.insertRow(-1);
+        for (let j = 0; j <= size; j++)
         {
-            this.table.insertRow(-1);
-            for (let j = 0; j <= this.board.size; j++)
-            {
-                this.table.rows[i].insertCell(-1);
-            }
+            table.rows[i].insertCell(-1);
         }
-
     }
-    Output(): void
+
+}
+function Output(board: Board, table: HTMLTableElement, colors: string[]): void
+{
+    for (let i = 0; i <= board.size; i++)
     {
-        for (let i = 0; i <= this.board.size; i++)
+        for (let j = 0; j <= board.size; j++)
         {
-            for (let j = 0; j <= this.board.size; j++)
+            let cell = table.rows[i].cells[j];
+            //cell.style.borderWidth = "medium";
+            if (i == 0)
             {
-                let cell = this.table.rows[i].cells[j];
-                //cell.style.borderWidth = "medium";
-                if (i == 0)
+                cell.className = "head";
+                if (j != 0)
+                    cell.innerHTML = String(j);
+            }
+            else if (j == 0)
+            {
+                cell.className = "head"
+                cell.innerHTML = String(i);
+            }
+            else
+            {
+                cell.className = "body";
+                if (board.GetBoard([i - 1, j - 1]) != -1)
                 {
-                    cell.className = "head";
-                    if (j != 0)
-                        cell.innerHTML = String(j);
-                }
-                else if (j == 0)
-                {
-                    cell.className = "head"
-                    cell.innerHTML = String(i);
+                    cell.style.color = colors[board.GetBoard([i - 1, j - 1])];
+                    cell.innerHTML = "●";
                 }
                 else
                 {
-                    cell.className = "body";
-                    if (this.board.GetBoard([i - 1, j - 1]) != -1)
-                    {
-                        cell.style.color = this.colors[this.board.GetBoard([i - 1, j - 1])];
-                        cell.innerHTML = "●";
-                    }
-                    else
-                    {
-                        cell.innerHTML = "　";
-                    }
+                    cell.innerHTML = "　";
                 }
             }
         }
     }
-    Input()
+}
+function Input(table: HTMLTableElement,board:Board,junban:number, inputFunction: (position: number[], board: Board, junban: number)=>void)//:number[]
+{
+    table.onclick = function (event)
     {
-        this.table.onclick = function (event)
-        {
-            CellClick(event.target as HTMLTableCellElement);
-        }
-        //while (true)
-        {
-            
-        }
+        let cell = event.target as HTMLTableCellElement;
+        (cell.parentElement.parentElement as HTMLTableElement).onclick = null;
+        let clickPos: number[];
+        clickPos = new Array(2);
+        clickPos[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
+        clickPos[1] = cell.cellIndex;
+
+        let position = new Array<number>(2);
+        position[0] = clickPos[0] - 1;
+        position[1] = clickPos[1] - 1;
+        inputFunction(position,board,junban)
     }
 }
 
+export default { start, Output, Input };
 
-function CellClick(cell: HTMLTableCellElement): boolean
-{
-    let position: number[];
-    position = new Array(2);
-    position[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
-    position[1] = cell.cellIndex;
-    return true;
-}

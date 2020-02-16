@@ -1,5 +1,8 @@
-function start(table, size) {
+function start(table, size, func) {
     table.className = "board";
+    table.onclick = function (event) {
+        TableClick(event.target, func);
+    };
     for (let i = 0; i <= size; i++) {
         table.insertRow(-1);
         for (let j = 0; j <= size; j++) {
@@ -28,25 +31,22 @@ function Output(board, table, colors) {
                     cell.innerHTML = "●";
                 }
                 else {
-                    cell.innerHTML = "　";
+                    //cell.innerHTML = "　";
                 }
             }
         }
     }
 }
-function Input(table, board, junban, inputFunction) {
-    table.onclick = function (event) {
-        let cell = event.target;
-        cell.parentElement.parentElement.onclick = null;
-        let clickPos;
-        clickPos = new Array(2);
-        clickPos[0] = cell.parentNode.rowIndex;
-        clickPos[1] = cell.cellIndex;
-        let position = new Array(2);
-        position[0] = clickPos[0] - 1;
-        position[1] = clickPos[1] - 1;
-        inputFunction(position, board, junban);
-    };
+function TableClick(cell, func) {
+    //(cell.parentElement.parentElement as HTMLTableElement).onclick = null;
+    let clickPos;
+    clickPos = new Array(2);
+    clickPos[0] = cell.parentNode.rowIndex;
+    clickPos[1] = cell.cellIndex;
+    let position = new Array(2);
+    position[0] = clickPos[0] - 1;
+    position[1] = clickPos[1] - 1;
+    func(position);
 }
-export default { start, Output, Input };
+export default { start, Output };
 //# sourceMappingURL=othello_io.js.map

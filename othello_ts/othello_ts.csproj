@@ -88,6 +88,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="arrayCalc.ts" />
     <TypeScriptCompile Include="Board.ts" />
     <TypeScriptCompile Include="index.ts" />
     <TypeScriptCompile Include="othello_io.ts" />

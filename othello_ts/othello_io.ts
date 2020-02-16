@@ -1,9 +1,13 @@
 ﻿import Board from "./Board.js"
 
 
-function start(table: HTMLTableElement,  size: number)
+function start(table: HTMLTableElement,  size: number,func:(position:number[])=>void)
 {
     table.className = "board";
+    table.onclick = function (event)
+    {
+        TableClick(event.target as HTMLTableCellElement,func);
+    }
     for (let i = 0; i <= size; i++)
     {
         table.insertRow(-1);
@@ -43,29 +47,27 @@ function Output(board: Board, table: HTMLTableElement, colors: string[]): void
                 }
                 else
                 {
-                    cell.innerHTML = "　";
+                    //cell.innerHTML = "　";
                 }
             }
         }
     }
 }
-function Input(table: HTMLTableElement,board:Board,junban:number, inputFunction: (position: number[], board: Board, junban: number)=>void)//:number[]
-{
-    table.onclick = function (event)
-    {
-        let cell = event.target as HTMLTableCellElement;
-        (cell.parentElement.parentElement as HTMLTableElement).onclick = null;
-        let clickPos: number[];
-        clickPos = new Array(2);
-        clickPos[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
-        clickPos[1] = cell.cellIndex;
 
-        let position = new Array<number>(2);
-        position[0] = clickPos[0] - 1;
-        position[1] = clickPos[1] - 1;
-        inputFunction(position,board,junban)
-    }
+function TableClick(cell: HTMLTableCellElement, func: (position: number[]) => void)
+{
+    //(cell.parentElement.parentElement as HTMLTableElement).onclick = null;
+    let clickPos: number[];
+    clickPos = new Array(2);
+    clickPos[0] = (cell.parentNode as HTMLTableRowElement).rowIndex;
+    clickPos[1] = cell.cellIndex;
+
+    let position = new Array<number>(2);
+    position[0] = clickPos[0] - 1;
+    position[1] = clickPos[1] - 1;
+    func(position);
+
 }
 
-export default { start, Output, Input };
+export default { start, Output };
 

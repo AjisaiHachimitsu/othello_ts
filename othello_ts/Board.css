@@ -4,7 +4,9 @@
     border-collapse:collapse;
     table-layout:fixed;
     border-width:thick;
-    font-size:x-large;
+    font-size:24px;
+    text-align:center;
+    vertical-align:middle;
 }
 
 .board .head {
@@ -12,6 +14,7 @@
     border-width: medium;
     background-color:lightgreen;
     font-weight:bold;
+    width:24px
 }
 .board .body {
     background-color: green;

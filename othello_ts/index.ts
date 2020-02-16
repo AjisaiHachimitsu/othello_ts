@@ -1,30 +1,32 @@
 ﻿import Board from "./Board.js";
 import OthelloIo from "./othello_io.js";
-let othelloIo = OthelloIo;
-Othello();
 
 
-function Othello()
+let table: HTMLTableElement;
+let board: Board;
+const colors = ["black", "white"];
+const ninzu = 2;
+let junban: number;
+function start()
 {
-    let board = new Board();
-    let table: HTMLTableElement = document.getElementById("table") as HTMLTableElement;
-    const colors = ["black", "white"];
-    //const othelloIo = new OthelloIo(board, table, colors);
-    othelloIo.start(table, 8);
-    othelloIo.Output(board, table, colors);
-    const ninzu = 2;
-    let junban = 0;
-    //while (true)
+    table = document.getElementById("table") as HTMLTableElement;
+    board = new Board();
+    OthelloIo.start(table, board.size, Input);
+    OthelloIo.Output(board, table, colors);
+    junban = 0;
+}
+
+function Input(position: number[])
+{
+    //alert(position);
+    if (board.Put(position, junban))
     {
-        let input: number[];
-        othelloIo.Input(table,board,junban,Input);
-        othelloIo.Output(board, table, colors);
+        OthelloIo.Output(board, table, colors);
         junban++;
         junban %= ninzu;
     }
 }
 
-function Input(position:number[], board:Board,junban:number)//: boolean
-{
-    board.Put(position, junban);
-}
+
+start();
+

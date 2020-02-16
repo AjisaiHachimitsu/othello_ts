@@ -28,8 +28,10 @@ export default class Board {
         return true;
     }
     Reverce(position, junban) {
-        if (this.GetBoard(position) != -1 || this.IsOutOfField(position))
+        if (this.GetBoard(position) != -1 || this.IsOutOfField(position)) {
+            alert("そこには置けません");
             return false;
+        }
         let isPutAble = false;
         for (let i of this.dirs) {
             if (this.ReverceDir(position, junban, i))
@@ -41,8 +43,10 @@ export default class Board {
     }
     ReverceDir(position, junban, dir) {
         let a = ArrayCalc.Add(position, dir);
-        if (this.GetBoard(a) === -1 || this.GetBoard(a) === junban || this.IsOutOfField(a))
+        //alert(a);
+        if (this.IsOutOfField(a) || this.GetBoard(a) === -1 || this.GetBoard(a) === junban) {
             return false;
+        }
         let count = 2;
         while (true) {
             let b = ArrayCalc.Add(position, ArrayCalc.Scalar(count, dir));
@@ -59,13 +63,15 @@ export default class Board {
     }
     IsOutOfField(position) {
         for (let i of position) {
-            if (i < 0 || i >= this.size)
-                alert("枠外には置けません");
-            return true;
+            if (i < 0 || i >= this.size) {
+                return true;
+            }
         }
         return false;
     }
     GetBoard(pos) {
+        if (this.IsOutOfField(pos))
+            return undefined;
         return this.board[pos[0]][pos[1]];
     }
     SetBoard(pos, value) {

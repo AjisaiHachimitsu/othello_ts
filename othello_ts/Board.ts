@@ -69,9 +69,9 @@ export default class Board
         while (true)
         {
             let b = ArrayCalc.Add(position, ArrayCalc.Scalar(count, dir))
-            if (this.IsOutOfField(b))
+            if (this.IsOutOfField(b)||this.GetBoard(b)===-1)
                 return false;
-            if (this.GetBoard(b) == junban)
+            if (this.GetBoard(b) === junban)
             {
                 for (let j = 0; j < count; j++)
                 {

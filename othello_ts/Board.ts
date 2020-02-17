@@ -34,34 +34,35 @@ export default class Board
 
     Put(position: number[], junban: number): boolean
     {
-        if (this.Reverce(position,junban) == false)
+        if (this.Check(position,junban) == false)
             return false;
+        this.Reverce(position, junban);
         //this.board[position[0]][position[1]] = junban;
         return true;
     }
     readonly dirs: number[][];
-    private Reverce(position:number[],junban:number): boolean
+
+    private Check(position: number[], junban: number): boolean
     {
         if (this.GetBoard(position) != -1 || this.IsOutOfField(position))
         {
             alert("そこには置けません");
             return false;
         }
-        let isPutAble = false;
         for (let i of this.dirs)
         {
-            if (this.ReverceDir(position, junban, i))
-                isPutAble = true;
-            if (this.ReverceDir(position, junban, ArrayCalc.Scalar(-1, i)))
-                isPutAble = true;
+            if (this.CheckDir(position, junban, i))
+                return  true;
+            if (this.CheckDir(position, junban, ArrayCalc.Scalar(-1, i)))
+                return true;
         }
-        return isPutAble;
+        return false;
     }
-    private ReverceDir(position: number[], junban: number, dir: number[]):boolean
+    private CheckDir(position: number[], junban: number, dir: number[]): boolean
     {
         let a = ArrayCalc.Add(position, dir)
         //alert(a);
-        if (this.IsOutOfField(a)||this.GetBoard(a) === -1 || this.GetBoard(a) === junban  )
+        if (this.IsOutOfField(a) || this.GetBoard(a) === -1 || this.GetBoard(a) === junban)
         {
             return false;
         }
@@ -69,15 +70,44 @@ export default class Board
         while (true)
         {
             let b = ArrayCalc.Add(position, ArrayCalc.Scalar(count, dir))
-            if (this.IsOutOfField(b)||this.GetBoard(b)===-1)
+            if (this.IsOutOfField(b) || this.GetBoard(b) === -1)
                 return false;
+            if (this.GetBoard(b) === junban)
+            {
+                return true;
+            }
+            count++;
+        }
+    }
+    private Reverce(position:number[],junban:number):void
+    {
+        for (let i of this.dirs)
+        {
+            this.ReverceDir(position, junban, i)
+            this.ReverceDir(position, junban, ArrayCalc.Scalar(-1, i))
+        }
+    }
+    private ReverceDir(position: number[], junban: number, dir: number[]):void
+    {
+        let a = ArrayCalc.Add(position, dir)
+        //alert(a);
+        if (this.IsOutOfField(a) || this.GetBoard(a) === -1 || this.GetBoard(a) === junban)
+        {
+            return ;
+        }
+        let count = 2;
+        while (true)
+        {
+            let b = ArrayCalc.Add(position, ArrayCalc.Scalar(count, dir))
+            if (this.IsOutOfField(b)||this.GetBoard(b)===-1)
+                return;
             if (this.GetBoard(b) === junban)
             {
                 for (let j = 0; j < count; j++)
                 {
                     this.SetBoard(ArrayCalc.Add(position, ArrayCalc.Scalar(j, dir)), junban);
                 }
-                return true;
+                return ;
             }
             count++;
         }

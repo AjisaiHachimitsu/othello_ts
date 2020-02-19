@@ -16,4 +16,14 @@
             this.coefficient = coe.slice();
         }
     }
+
+    GetValue(x: number): number//多項式の値
+    {
+        let value = 0;
+        for (let i = 0; i < this.coefficient.length; i++)
+        {
+            value += this.coefficient[i] * Math.pow(x, i);
+        }
+        return value;
+    }
 }

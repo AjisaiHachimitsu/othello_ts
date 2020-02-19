@@ -10,5 +10,12 @@ export default class Polynomial {
             this.coefficient = coe.slice();
         }
     }
+    GetValue(x) {
+        let value = 0;
+        for (let i = 0; i < this.coefficient.length; i++) {
+            value += this.coefficient[i] * Math.pow(x, i);
+        }
+        return value;
+    }
 }
 //# sourceMappingURL=Polynomial.js.map

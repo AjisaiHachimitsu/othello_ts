@@ -4,26 +4,23 @@ export default class Board
     readonly size: number;
     //readonly ninzu: number;
     readonly dimension: number;
-    private board: number[][];
+    private board: number[];
     //junban = 0;
     constructor()
     {
         this.size = 8;
         //this.ninzu = 2;
         this.dimension = 2;
-        this.board = new Array(this.size);
+        this.board = new Array(Math.pow( this.size,this.dimension));
         for (let i = 0; i < this.board.length; i++)
         {
-            this.board[i] = new Array(this.size);
-            for (let j = 0; j < this.board[i].length; j++)
-            {
-                this.board[i][j] = -1;
-            }
+                this.board[i]= -1;
+            
         }
-        this.board[3][4] = 0;
-        this.board[4][3] = 0;
-        this.board[3][3] = 1;
-        this.board[4][4] = 1;
+        //this.board[3][4] = 0;
+        //this.board[4][3] = 0;
+        //this.board[3][3] = 1;
+        //this.board[4][4] = 1;
 
         this.dirs = new Array<number[]>((Math.pow(3 , this.dimension) - 1) / 2)
         for (let i = 0; i < this.dirs.length;i++)
@@ -128,12 +125,21 @@ export default class Board
     {
         if (this.IsOutOfField(pos))
             return undefined;
+        if (this.dimension !== pos.length)
+            return undefined;
+
         return this.board[pos[0]][pos[1]];
     }
     private SetBoard(pos: number[], value: number)
     {
         this.board[pos[0]][pos[1]] = value;
     }
+
+    GetPutAbles(junban: number): number[][]
+    {
+
+    }
 }
+
 
 

@@ -14,7 +14,10 @@ function start()
     OthelloIo.start(table, board.size, Input);
     OthelloIo.Output(board, table, colors);
     junban = 0;
+    ShowMessage(junban);
+
 }
+let msg = document.getElementById("message")
 
 function Input(position: number[])
 {
@@ -22,14 +25,26 @@ function Input(position: number[])
     if (board.Put(position, junban))
     {
         OthelloIo.Output(board, table, colors);
-        junban++;
-        junban %= ninzu;
+        let passCount = 0;
+        do
+        {
+            junban++;
+            junban %= ninzu;
+            if (passCount >= ninzu)
+            {
+                msg.innerHTML = "ゲーム終了";
+                break;
+            }
+            if (passCount !== 0)
+                msg.innerHTML += "パス<br>";
+            passCount++;
+        } while (board.GetPutAbles(junban).length === 0)
+        ShowMessage(junban);
     }
 }
-
-function(junban: number)
+function ShowMessage(junban: number)
 {
-
+    msg.innerHTML = '<span style="color:' + colors[junban] + '">●</span>の番です。' + String(board.GetPutAbles(junban).length) + '<br>';
 }
 
 start();

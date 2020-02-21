@@ -47,7 +47,7 @@ export default class Board
     {
         if (this.GetBoard(position) != -1 || this.IsOutOfField(position))
         {
-            alert("そこには置けません");
+            //alert("そこには置けません");
             return false;
         }
         for (let i of this.dirs)
@@ -149,6 +149,7 @@ export default class Board
                 putable.push(this.ChangeIndexToArray(i))
             }
         }
+        //alert(putable.length);
         return putable;
     }
     private ChangeIndexToNum(pos: number[]): number

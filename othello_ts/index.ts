@@ -27,6 +27,10 @@ function Input(position: number[])
     }
 }
 
+function(junban: number)
+{
+
+}
 
 start();
 

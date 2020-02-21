@@ -21,6 +21,10 @@ export default class Board
         //this.board[4][3] = 0;
         //this.board[3][3] = 1;
         //this.board[4][4] = 1;
+        this.SetBoard([3, 4], 0);
+        this.SetBoard([4, 3], 0);
+        this.SetBoard([4, 4], 1);
+        this.SetBoard([3, 3], 1);
 
         this.dirs = new Array<number[]>((Math.pow(3 , this.dimension) - 1) / 2)
         for (let i = 0; i < this.dirs.length;i++)
@@ -128,17 +132,53 @@ export default class Board
         if (this.dimension !== pos.length)
             return undefined;
 
-        return this.board[pos[0]][pos[1]];
+        return this.board[this.ChangeIndexToNum(pos)];
     }
     private SetBoard(pos: number[], value: number)
     {
-        this.board[pos[0]][pos[1]] = value;
+        this.board[this.ChangeIndexToNum(pos)] = value;
     }
 
     GetPutAbles(junban: number): number[][]
     {
-
+        let putable:number[][] = [];
+        for (let i = 0; i < this.board.length; i++)
+        {
+            if (this.Check(this.ChangeIndexToArray(i), junban))
+            {
+                putable.push(this.ChangeIndexToArray(i))
+            }
+        }
+        return putable;
     }
+    private ChangeIndexToNum(pos: number[]): number
+    {
+        let sum = 0;
+        for (let i = 0; i < pos.length; i++)
+        {
+            sum += pos[i] * Math.pow(this.size, i);
+        }
+        //alert (sum);
+        return sum;
+    }
+
+    private ChangeIndexToArray(index: number): number[]
+    {
+        let pos = new Array<number>(this.dimension);
+        for (let i = 0; i < this.dimension; i++)
+        {
+            if (i < this.dimension - 1)
+            {
+                pos[i] = Math.floor(index / Math.pow(this.size, this.dimension - i - 1))
+            }
+            else
+            {
+                pos[i] = index % this.size;
+            }
+        }
+        return pos;
+    }
+
 }
 
 

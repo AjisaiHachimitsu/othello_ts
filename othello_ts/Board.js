@@ -1,10 +1,10 @@
 import ArrayCalc from "./arrayCalc.js";
 export default class Board {
     //junban = 0;
-    constructor() {
-        this.size = 8;
-        //this.ninzu = 2;
-        this.dimension = 2;
+    constructor(dimension0, size0, ninzu0) {
+        this.size = size0;
+        this.ninzu = ninzu0;
+        this.dimension = dimension0;
         this.board = new Array(Math.pow(this.size, this.dimension));
         for (let i = 0; i < this.board.length; i++) {
             this.board[i] = -1;
@@ -13,10 +13,16 @@ export default class Board {
         //this.board[4][3] = 0;
         //this.board[3][3] = 1;
         //this.board[4][4] = 1;
-        this.SetBoard([3, 4], 0);
+        /*this.SetBoard([3, 4], 0);
         this.SetBoard([4, 3], 0);
         this.SetBoard([3, 3], 1);
-        this.SetBoard([4, 4], 1);
+        this.SetBoard([4, 4], 1);*/
+        const a = Math.floor((this.size - this.ninzu) / 2);
+        for (let i = 0; i < this.ninzu; i++) {
+            for (let j = 0; j < this.ninzu; j++) {
+                this.SetBoard([a + i, a + j], (i + j) % this.ninzu);
+            }
+        }
         this.dirs = new Array((Math.pow(3, this.dimension) - 1) / 2);
         for (let i = 0; i < this.dirs.length; i++) {
             this.dirs[i] = [Math.floor(i / 3) - 1, i % 3 - 1];
@@ -132,6 +138,16 @@ export default class Board {
             }
         }
         return pos;
+    }
+    CountEachStone() {
+        let sum = new Array(this.ninzu);
+        for (let i = 0; i < sum.length; i++) {
+            sum[i] = 0;
+        }
+        for (let i of this.board) {
+            sum[i]++;
+        }
+        return sum;
     }
 }
 //# sourceMappingURL=Board.js.map

@@ -2,12 +2,14 @@ import Board from "./Board.js";
 import OthelloIo from "./othello_io.js";
 let table;
 let board;
-const colors = ["black", "white"];
-const ninzu = 2;
+const colors = ["black", "white", "blue", "red"];
+const ninzu = 3;
+const size = 9;
+const dimension = 2;
 let junban;
 function start() {
     table = document.getElementById("table");
-    board = new Board();
+    board = new Board(dimension, size, ninzu);
     OthelloIo.start(table, board.size, Input);
     OthelloIo.Output(board, table, colors);
     junban = 0;
@@ -36,7 +38,8 @@ function Input(position) {
     }
 }
 function ShowMessage(junban) {
-    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
+    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>'
+        + String(board.CountEachStone()) + "<br>";
 }
 start();
 //# sourceMappingURL=index.js.map

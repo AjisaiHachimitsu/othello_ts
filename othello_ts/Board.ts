@@ -8,7 +8,7 @@ export default class Board
     //junban = 0;
     constructor()
     {
-        this.size = 8;
+        this.size = 4;
         //this.ninzu = 2;
         this.dimension = 2;
         this.board = new Array(Math.pow( this.size,this.dimension));
@@ -21,10 +21,10 @@ export default class Board
         //this.board[4][3] = 0;
         //this.board[3][3] = 1;
         //this.board[4][4] = 1;
-        this.SetBoard([3, 4], 0);
-        this.SetBoard([4, 3], 0);
-        this.SetBoard([4, 4], 1);
-        this.SetBoard([3, 3], 1);
+        this.SetBoard([1, 2], 0);
+        this.SetBoard([2, 1], 0);
+        this.SetBoard([1, 1], 1);
+        this.SetBoard([2, 2], 1);
 
         this.dirs = new Array<number[]>((Math.pow(3 , this.dimension) - 1) / 2)
         for (let i = 0; i < this.dirs.length;i++)

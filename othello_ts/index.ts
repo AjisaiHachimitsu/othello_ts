@@ -5,8 +5,8 @@ import OthelloIo from "./othello_io.js";
 let table: HTMLTableElement;
 let board: Board;
 const colors = ["black", "white","blue","red"];
-const ninzu = 3;
-const size = 9;
+const ninzu = 2;
+const size = 8;
 const dimension=2
 let junban: number;
 function start()
@@ -38,7 +38,7 @@ function Input(position: number[])
                 msg.innerHTML += "パス<br>";
             if (passCount >= ninzu)
             {
-                msg.innerHTML= "ゲーム終了";
+                msg.innerHTML+= "ゲーム終了";
                 table.onclick = function ()
                 { } ;
                 return;

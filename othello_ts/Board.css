@@ -21,6 +21,14 @@
     border-width: medium;
 }
 
-p{
+#message{
+    background-color:lightgreen;
+}
+
+input{
+    width:50px;
+}
+
+.input{
     background-color:lightgreen;
 }

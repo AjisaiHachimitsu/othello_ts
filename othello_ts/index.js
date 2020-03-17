@@ -2,9 +2,9 @@ import Board from "./Board.js";
 import OthelloIo from "./othello_io.js";
 let table;
 let board;
-const colors = ["black", "white", "blue", "red"];
+const colors = ["black", "white", "blue", "red", "yellow", "purple", "pink", "skyblue"];
 const ninzu = 2;
-const size = 8;
+const size = 4;
 const dimension = 2;
 let junban;
 function start() {
@@ -29,8 +29,7 @@ function Input(position) {
             if (board.GetPutAbles(junban).length === 0)
                 msg.innerHTML += "パス<br>";
             if (passCount >= ninzu) {
-                msg.innerHTML += "ゲーム終了";
-                table.onclick = function () { };
+                Finish();
                 return;
             }
             passCount++;
@@ -38,8 +37,35 @@ function Input(position) {
     }
 }
 function ShowMessage(junban) {
-    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>'
-        + String(board.CountEachStone()) + "<br>";
+    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
+    for (let i = 0; i < ninzu; i++) {
+        msg.innerHTML += '<span style="color:' + colors[i] + '">●</span> ' + String(board.CountEachStone()[i]) + '<br>';
+    }
+    //+ String(board.CountEachStone())+"<br>";
+}
+function Finish() {
+    msg.innerHTML += "ゲーム終了<br>";
+    let maxIndex = [0];
+    let max = board.CountEachStone()[0];
+    for (let i = 1; i < ninzu; i++) {
+        if (board.CountEachStone()[i] > max) {
+            max = board.CountEachStone()[i];
+            maxIndex = [i];
+        }
+        else if (board.CountEachStone()[i] === max) {
+            maxIndex.push(i);
+        }
+    }
+    if (maxIndex.length === ninzu) {
+        msg.innerHTML += '引き分けです';
+    }
+    else {
+        for (let item of maxIndex) {
+            msg.innerHTML += '<span style="color:' + colors[item] + '">●</span> ';
+        }
+        msg.innerHTML += 'の勝ちです';
+    }
+    table.onclick = function () { };
 }
 start();
 //# sourceMappingURL=index.js.map

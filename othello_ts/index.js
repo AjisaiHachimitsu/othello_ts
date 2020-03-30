@@ -8,7 +8,10 @@ let size;
 const dimension = 2;
 let junban;
 function start() {
+    size = Number(document.getElementById("size-box").value);
+    ninzu = Number(document.getElementById("ninzu-box").value);
     table = document.getElementById("table");
+    table.innerHTML = "";
     board = new Board(dimension, size, ninzu);
     OthelloIo.start(table, board.size, Input);
     OthelloIo.Output(board, table, colors);
@@ -37,10 +40,10 @@ function Input(position) {
     }
 }
 function ShowMessage(junban) {
-    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
     for (let i = 0; i < ninzu; i++) {
         msg.innerHTML += '<span style="color:' + colors[i] + '">●</span> ' + String(board.CountEachStone()[i]) + '<br>';
     }
+    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
     //+ String(board.CountEachStone())+"<br>";
 }
 function Finish() {
@@ -67,5 +70,5 @@ function Finish() {
     }
     table.onclick = function () { };
 }
-start();
+document.getElementById("start-button").onclick = start;
 //# sourceMappingURL=index.js.map

@@ -11,8 +11,10 @@ const dimension=2
 let junban: number;
 function start()
 {
-    let size = (document.getElementById("size-box") as HTMLInputElement).value as number;
+     size =Number( (document.getElementById("size-box") as HTMLInputElement).value );
+    ninzu = Number((document.getElementById("ninzu-box") as HTMLInputElement).value);
     table = document.getElementById("table") as HTMLTableElement;
+    table.innerHTML = "";
     board = new Board(dimension,size,ninzu);
     OthelloIo.start(table, board.size, Input);
     OthelloIo.Output(board, table, colors);
@@ -48,11 +50,11 @@ function Input(position: number[])
 }
 function ShowMessage(junban: number):void
 {
-    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
     for (let i = 0; i < ninzu; i++)
     {
         msg.innerHTML += '<span style="color:' + colors[i] + '">●</span> ' + String(board.CountEachStone()[i]) + '<br>';
     }
+    msg.innerHTML += '<span style="color:' + colors[junban] + '">●</span>の番です。<br>';
         //+ String(board.CountEachStone())+"<br>";
 }
 
@@ -88,5 +90,5 @@ function Finish():void
     table.onclick = function ()
     { };
 }
-start();
+(document.getElementById("start-button") as HTMLButtonElement).onclick= start; 
 

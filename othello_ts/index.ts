@@ -5,12 +5,13 @@ import OthelloIo from "./othello_io.js";
 let table: HTMLTableElement;
 let board: Board;
 const colors = ["black", "white","blue","red","yellow","purple","pink","skyblue"];
-const ninzu = 2;
-const size = 4;
+let ninzu:number;
+let size: number;
 const dimension=2
 let junban: number;
 function start()
 {
+    let size = (document.getElementById("size-box") as HTMLInputElement).value as number;
     table = document.getElementById("table") as HTMLTableElement;
     board = new Board(dimension,size,ninzu);
     OthelloIo.start(table, board.size, Input);

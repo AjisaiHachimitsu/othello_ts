@@ -3,8 +3,8 @@ import OthelloIo from "./othello_io.js";
 let table;
 let board;
 const colors = ["black", "white", "blue", "red", "yellow", "purple", "pink", "skyblue"];
-const ninzu = 2;
-const size = 4;
+let ninzu;
+let size;
 const dimension = 2;
 let junban;
 function start() {

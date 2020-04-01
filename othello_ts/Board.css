@@ -1,11 +1,12 @@
 ﻿.board{
     width:100%;
+    height:auto;
     /*background-color:green;*/
     border-color:black;
     border-collapse:collapse;
     table-layout:fixed;
     border-width:thick;
-    font-size:24px;
+    font-size:48px;
     text-align:center;
     vertical-align:middle;
 }
@@ -24,12 +25,15 @@
 
 #message{
     background-color:lightgreen;
+    font-size:36px;
 }
 
 input{
-    width:50px;
+    /*width:50px;*/
+    font-size:36px;
 }
 
 .input{
     background-color:lightgreen;
+    font-size:36px;
 }

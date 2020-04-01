@@ -1,4 +1,7 @@
-﻿.board{
+﻿body{
+    font-size:36px;
+}
+.board{
     width:100%;
     height:auto;
     /*background-color:green;*/
@@ -10,7 +13,6 @@
     text-align:center;
     vertical-align:middle;
 }
-
 .board .head {
 
     border-width: medium;
@@ -21,6 +23,7 @@
 .board .body {
     background-color: green;
     border-width: medium;
+    height:72px;
 }
 
 #message{
@@ -29,11 +32,13 @@
 }
 
 input{
-    /*width:50px;*/
+    width:108px;
     font-size:36px;
 }
-
+button {
+    width: auto;
+    font-size: 36px;
+}
 .input{
     background-color:lightgreen;
-    font-size:36px;
 }
